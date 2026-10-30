@@ -1,0 +1,68 @@
+[project]
+name = "nlp-with-transformers-exploration"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Justin Groves", email = "jagroves95@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "ipython>=9.17.1",
+    "transformers>=5.22.0",
+    "torch",
+    "ipykernel>=7.4.0",
+    "ipywidgets>=8.1.9",
+    "pandas>=3.1.0",
+    "sentencepiece>=0.2.2",
+    "sacremoses>=0.2.0",
+]
+
+[tool.uv.sources]
+torch = { index = "pytorch" }
+
+[[tool.uv.index]]
+name = "pytorch"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[project.scripts]
+nlp-with-transformers-exploration = "nlp_with_transformers_exploration:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.3",
+    "ruff-lsp>=0.0.62",
+]
+
+[tool.ruff]
+line-length = 120
+lint.select = [
+    "ALL", # include all the rules, including new ones
+]
+lint.ignore = [
+    #### specific rules
+    "ANN002", # type annotation for *args
+    "ANN003", # type annotation for **kwargs
+    "D100",   # missing docstring public module
+    "D101",   # missing docstring public class
+    "D102",   # missing docstring public method
+    "D103",   # missing docstring public function
+    "D104",   # missing docstring public package
+    "D107",   # missing docstring public __init__
+    "D203",   # avoid conflict with D211
+    "D213",   # avoid conflict with D213
+    "TD003",  # link for TODO issues
+    "TRY003", # external messages in exceptions to verbose
+    "FIX002", # resolve TODO statements
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "INP", # implicit nameplace, missing __init__
+    "S101" # presence of assert statements
+]
